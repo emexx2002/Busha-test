@@ -43,6 +43,10 @@ function usePost<T>(url: string, onSuccess?: (data: T) => void): UsePostResult<T
     } catch (error: any) {
       if (error.name !== 'AbortError') {
         setError(error.message);
+      } else if (error.message === "Failed to fetch" || error.name === "TypeError") {
+        setError("Network error");
+      } else {
+        setError("Network error");
       }
     } finally {
       setLoading(false);
